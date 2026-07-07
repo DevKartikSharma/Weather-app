@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <section className="pt-72 px-4 md:px-8">
+    <section className="pt-52 px-4 md:px-8">
       <div className="max-w-7xl mx-auto text-center">
         <div className="inline-block mb-6 px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-full text-sm text-slate-300">
           ✨ Real-time weather for every moment

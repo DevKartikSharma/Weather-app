@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
     const [city, setcity] = useState("");
+    const [weathercity, setweathercity] = useState("");
     const [weather, setweather] = useState({
         temp: null,
         apparentTemp: null,
@@ -15,6 +16,7 @@ export default function Home() {
         humidity: null,
         uv: null,
     })
+    const [hour, sethour] = useState([]);
     return (
         <main className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 p-4 md:p-8">
             <div className="max-w-6xl mx-auto space-y-8">
@@ -24,9 +26,9 @@ export default function Home() {
                     <p className="text-slate-400">Get real-time weather updates for any city</p>
                 </div>
 
-                <SearchBar city={city} setcity={setcity} setweather={setweather} />
-                <WeatherCard weather={weather} city={city}/>
-                <HourlyForecast />
+                <SearchBar city={city} setcity={setcity} setweather={setweather} setweathercity={setweathercity} sethour={sethour} />
+                <WeatherCard weather={weather} weathercity={weathercity} />
+                <HourlyForecast hour={hour} />
                 <WeeklyForecast />
             </div>
         </main>

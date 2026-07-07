@@ -3,7 +3,7 @@ import { Cloud, Sun, Wind, Droplets, Eye } from 'lucide-react'
 import { useState } from 'react'
 import { getWeather } from "../lib/weather";
 
-export default function WeatherCard({ weather, city }) {
+export default function WeatherCard({ weather, weathercity }) {
   function uvLevel(uv) {
     if (uv <= 2) return "Low";
     if (uv <= 5) return "Moderate";
@@ -13,7 +13,7 @@ export default function WeatherCard({ weather, city }) {
   }
   const Weather = getWeather(weather.condition);
   const Icon = Weather.Icon;
-  
+
   function getCondition(code) {
     switch (code) {
       case 0:
@@ -95,7 +95,8 @@ export default function WeatherCard({ weather, city }) {
     <div className="bg-linear-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md rounded-3xl border border-slate-700/30 p-8 md:p-12 shadow-2xl">
       <div className="flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex-1">
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-2">{city}</h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-2">{weathercity.charAt(0).toUpperCase() + weathercity.slice(1)}
+          </h2>
           <p className="text-slate-400 text-xl mb-6">{`${getCondition(weather.condition)}`}</p>
           <div className="flex items-baseline gap-4 mb-8">
             <span className="text-7xl font-bold text-white">{weather.temp}°C</span>
@@ -105,7 +106,7 @@ export default function WeatherCard({ weather, city }) {
 
         <div className="flex flex-col items-center gap-6">
           <div className="p-6 bg-slate-700/30 rounded-2xl">
-            <Icon className={`w-16 h-16 ${Weather.color}`}  />
+            <Icon className={`w-16 h-16 ${Weather.color}`} />
           </div>
         </div>
       </div>

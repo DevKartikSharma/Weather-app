@@ -2,33 +2,58 @@
 import { Search } from 'lucide-react'
 import { useEffect, useState } from 'react';
 
-export default function SearchBar({ city, setcity, setweather }) {
+export default function SearchBar({ city, setcity, setweather, sethour,setweathercity }) {
   const popularCities = ['London', 'New York', 'Tokyo', 'Paris', 'Sydney', 'Delhi']
 
-  useEffect(() => {
-    console.log(city);
-  }, [city])
+  // useEffect(() => {
+  //   console.log(city);
+  // }, [city])
   async function getGeocode(e) {
-    e?.preventDefault();
-    const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`)
-    const data = await res.json();
-    console.log(data);
-    const lat = data.results[0].latitude;
-    const long = data.results[0].longitude;
-    console.log(lat);
-    console.log(long);
-    const res2 = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code,uv_index&timezone=auto`);
-    const data2 = await res2.json();
-    console.log(data2);
+    try {
+      e?.preventDefault();
+      const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`)
+      const data = await res.json();
+      const lat = data.results[0].latitude;
+      const long = data.results[0].longitude;
+      console.log(lat);
+      console.log(long);
+      if (lat) {
+        const cwres = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code,uv_index&timezone=auto`);
+        const cwdata = await cwres.json();
+        console.log(cwdata);
+        
+        
+        const hfres = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,weather_code&forecast_hours=13&timezone=auto`);
+        const hfdata = await hfres.json();
+        console.log(hfdata);
+        
+        
+        setweather({
+          temp: cwdata.current.temperature_2m,
+          apparentTemp: cwdata.current.apparent_temperature,
+          condition: cwdata.current.weather_code,
+          wind: cwdata.current.wind_speed_10m,
+          humidity: cwdata.current.relative_humidity_2m,
+          uv: cwdata.current.uv_index,
+        })
+        
+        const formatedhour = hfdata.hourly.time.map((time, index) => ({
+          time: hfdata.hourly.time[index].split("T")[1],
+          temp: hfdata.hourly.temperature_2m[index],
+          condition: hfdata.hourly.weather_code[index],
+        }));
+        console.log(formatedhour)
+        sethour(formatedhour)
+        setweathercity(city);
+      } else {
+        console.log("Invalid Location");
+      }
 
-    setweather({
-      temp: data2.current.temperature_2m,
-      apparentTemp: data2.current.apparent_temperature,
-      condition: data2.current.weather_code,
-      wind: data2.current.wind_speed_10m,
-      humidity: data2.current.relative_humidity_2m,
-      uv: data2.current.uv_index,
-    })
+    } catch (e) {
+      if (e) {
+        console.log(e.status);
+      }
+    }
   }
   return (
 
