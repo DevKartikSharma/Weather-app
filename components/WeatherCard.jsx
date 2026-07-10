@@ -14,90 +14,13 @@ export default function WeatherCard({ weather, weathercity }) {
   const Weather = getWeather(weather.condition);
   const Icon = Weather.Icon;
 
-  function getCondition(code) {
-    switch (code) {
-      case 0:
-        return "Clear sky";
-
-      case 1:
-        return "Mainly clear";
-
-      case 2:
-        return "Partly cloudy";
-
-      case 3:
-        return "Overcast";
-
-      case 45:
-        return "Fog";
-      case 48:
-        return "Depositing rime fog";
-
-      case 51:
-        return "Light drizzle";
-      case 53:
-        return "Moderate drizzle";
-      case 55:
-        return "Dense drizzle";
-
-      case 56:
-        return "Light freezing drizzle";
-      case 57:
-        return "Dense freezing drizzle";
-
-      case 61:
-        return "Slight rain";
-      case 63:
-        return "Moderate rain";
-      case 65:
-        return "Heavy rain";
-
-      case 66:
-        return "Light freezing rain";
-      case 67:
-        return "Heavy freezing rain";
-
-      case 71:
-        return "Slight snow fall";
-      case 73:
-        return "Moderate snow fall";
-      case 75:
-        return "Heavy snow fall";
-
-      case 77:
-        return "Snow grains";
-
-      case 80:
-        return "Slight rain showers";
-      case 81:
-        return "Moderate rain showers";
-      case 82:
-        return "Violent rain showers";
-
-      case 85:
-        return "Slight snow showers";
-      case 86:
-        return "Heavy snow showers";
-
-      case 95:
-        return "Thunderstorm";
-
-      case 96:
-        return "Thunderstorm with slight hail";
-      case 99:
-        return "Thunderstorm with heavy hail";
-
-      default:
-        return "Unknown";
-    }
-  }
   return (weather.temp &&
     <div className="bg-linear-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md rounded-3xl border border-slate-700/30 p-8 md:p-12 shadow-2xl">
       <div className="flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex-1">
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-2">{weathercity.charAt(0).toUpperCase() + weathercity.slice(1)}
           </h2>
-          <p className="text-slate-400 text-xl mb-6">{`${getCondition(weather.condition)}`}</p>
+          <p className="text-slate-400 text-xl mb-6">{`${Weather.label}`}</p>
           <div className="flex items-baseline gap-4 mb-8">
             <span className="text-7xl font-bold text-white">{weather.temp}°C</span>
             <span className="text-2xl text-slate-400">Feels like {weather.apparentTemp}°C</span>
@@ -111,7 +34,7 @@ export default function WeatherCard({ weather, weathercity }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-slate-700/30">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-8 border-t border-slate-700/30 *:flex *:flex-col *:items-center">
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-slate-400">
             <Wind className="w-5 h-5" />

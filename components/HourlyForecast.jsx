@@ -3,7 +3,7 @@ import { getWeather } from '../lib/weather';
 
 export default function HourlyForecast({ hour }) {
 
-  return (hour &&
+  return (hour[1] &&
     <div className="bg-linear-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md rounded-3xl border border-slate-700/30 p-8 shadow-2xl">
       <h3 className="text-2xl font-bold text-white mb-6">Hourly Forecast</h3>
 
