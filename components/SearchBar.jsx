@@ -90,7 +90,7 @@ export default function SearchBar({ city, setcity, setweather, sethour, hour, se
   }
   return (
 
-    <div className={`w-full ${hour[1]?"mb-10":"mb-20"} `}>
+    <div className={`w-full ${hour[1]?"mb-5":"mb-10"} `}>
       <form className="mb-6 w-full" onSubmit={getGeocode}>
         <div className="relative group w-full">
           <div className="w-full absolute inset-0 bg-linear-to-r from-blue-600/20 to-cyan-600/20 rounded-full blur-lg group-hover:blur-xl transition-all"></div>
