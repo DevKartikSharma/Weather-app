@@ -15,6 +15,14 @@ export default function SearchBar({ city, setcity, setweather, sethour, hour, se
     }
   }, [city])
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log(query);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [query])
+
+
   async function getGeocode(e) {
     const searchTerm = (query || city).trim();
     e?.preventDefault();
@@ -88,9 +96,11 @@ export default function SearchBar({ city, setcity, setweather, sethour, hour, se
       setloading(false);
     }
   }
+
+
   return (
 
-    <div className={`w-full ${hour[1]?"mb-5":"mb-10"} `}>
+    <div className={`w-full ${hour[1] ? "mb-5" : "mb-10"} `}>
       <form className="mb-6 w-full" onSubmit={getGeocode}>
         <div className="relative group w-full">
           <div className="w-full absolute inset-0 bg-linear-to-r from-blue-600/20 to-cyan-600/20 rounded-full blur-lg group-hover:blur-xl transition-all"></div>
@@ -111,6 +121,59 @@ export default function SearchBar({ city, setcity, setweather, sethour, hour, se
             >
               Search
             </button>
+          </div>
+
+          <div className="absolute left-0 right-0 top-[115%] z-50">
+            <div className="overflow-hidden rounded-[28px] hidden border border-slate-700/40 bg-slate-900/45 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,.45)]">
+
+
+              <div className="h-px w-full bg-linear-to-r from-transparent via-cyan-400/50 to-transparent" />
+
+              <button className="group relative flex w-full items-center gap-4 px-6 py-4 transition-all duration-300 hover:bg-white/5">
+                <div className="absolute left-0 h-0 w-1 rounded-r-full bg-cyan-400 transition-all duration-300 group-hover:h-10" />
+
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md group-hover:border-cyan-400/30 group-hover:bg-cyan-500/10">
+                  <Search className="h-5 w-5 text-cyan-300" />
+                </div>
+
+                <div className="flex flex-col items-start">
+                  <span className="font-medium text-white">London</span>
+                  <span className="text-sm text-slate-400">United Kingdom</span>
+                </div>
+              </button>
+
+              <div className="mx-5 h-px bg-linear-to-r from-transparent via-slate-700/60 to-transparent" />
+
+              <button className="group relative flex w-full items-center gap-4 px-6 py-4 transition-all duration-300 hover:bg-white/5">
+                <div className="absolute left-0 h-0 w-1 rounded-r-full bg-cyan-400 transition-all duration-300 group-hover:h-10" />
+
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md group-hover:border-cyan-400/30 group-hover:bg-cyan-500/10">
+                  <Search className="h-5 w-5 text-cyan-300" />
+                </div>
+
+                <div className="flex flex-col items-start">
+                  <span className="font-medium text-white">Paris</span>
+                  <span className="text-sm text-slate-400">France</span>
+                </div>
+              </button>
+
+              <div className="mx-5 h-px bg-linear-to-r from-transparent via-slate-700/60 to-transparent" />
+
+              <button className="group relative flex w-full items-center gap-4 px-6 py-4 transition-all duration-300 hover:bg-white/5">
+                <div className="absolute left-0 h-0 w-1 rounded-r-full bg-cyan-400 transition-all duration-300 group-hover:h-10" />
+
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md group-hover:border-cyan-400/30 group-hover:bg-cyan-500/10">
+                  <Search className="h-5 w-5 text-cyan-300" />
+                </div>
+
+                <div className="flex flex-col items-start">
+                  <span className="font-medium text-white">Tokyo</span>
+                  <span className="text-sm text-slate-400">Japan</span>
+                </div>
+              </button>
+
+              <div className="mx-5 h-px bg-linear-to-r from-transparent via-slate-700 to-transparent" />
+            </div>
           </div>
         </div>
       </form>

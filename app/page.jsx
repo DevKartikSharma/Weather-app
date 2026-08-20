@@ -1,7 +1,3 @@
-import SearchBar from '../components/SearchBar'
-import WeatherCard from '../components/WeatherCard'
-import HourlyForecast from '../components/HourlyForecast'
-import WeeklyForecast from '../components/WeeklyForecast'
 import Link from 'next/link'
 
 export default function Home() {
@@ -9,7 +5,7 @@ export default function Home() {
     <section className="flex items-center min-h-screen px-4 md:px-8">
       <div className="max-w-7xl mx-auto text-center">
         <div className="inline-block mb-6 px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-full text-sm text-slate-300">
-          ✨ Real-time weather for every moment
+          Real-time weather for every moment
         </div>
 
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
